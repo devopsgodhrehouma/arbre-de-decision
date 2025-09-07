@@ -4,7 +4,7 @@ flowchart LR
 
     A -->|nuageux • 4/14| B["FEUILLE\njouer = oui\nP(oui) = 4/4 = 1,00"]
     A -->|ensoleillé • 5/14| C["humidité ?\nH = 0,971 • IG = 0,971\nP(oui) = 2/5 (0,40)"]
-    A -->|pluvieux • 5/14|  F['vent ?\nH = 0,971 • IG = 0,971\nP(oui) = 3/5 (0,60)']
+    A -->|pluvieux • 5/14| F['vent \?\nH = 0,971 • IG = 0,971\nP(oui) = 3/5 (0,60)']
 
     C -->|haute • 3/5|   D["FEUILLE\njouer = non\nP(oui) = 0/3 = 0,00"]
     C -->|normale • 2/5| E["FEUILLE\njouer = oui\nP(oui) = 2/2 = 1,00"]
