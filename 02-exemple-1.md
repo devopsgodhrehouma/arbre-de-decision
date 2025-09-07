@@ -172,3 +172,173 @@ Règles feuilles :
 4. S’arrêter si le nœud est **pur** (entropie 0) ou si plus d’attributs utiles.
 5. Les **règles** se lisent du **haut vers la feuille**.
 
+
+
+
+
+# Annexe 1 :
+
+
+# 0) Notation & arrondis
+
+* $n$ = nb d’exemples du nœud.
+* $n_{oui}$, $n_{non}$ = comptes par classe.
+* $p_{oui} = n_{oui}/n$, $p_{non} = n_{non}/n$.
+* $\log_2 x = \ln(x)/\ln(2)$.
+* Arrondis à 4 décimales.
+
+---
+
+# 1) Entropie d’un nœud (formule générique)
+
+$$
+H(S)= -\sum_{c\in\{\text{oui, non}\}} p_c \log_2(p_c)
+= -\big(p_{oui}\log_2 p_{oui}+p_{non}\log_2 p_{non}\big)
+$$
+
+**À obtenir (jeu complet)**
+$n=14,\ n_{oui}=9,\ n_{non}=5 \Rightarrow p_{oui}=9/14,\ p_{non}=5/14$
+$\boxed{H(S)=0.9403}$
+
+---
+
+# 2) Entropie après une découpe par un attribut $A$
+
+Pour chaque valeur $v$ de $A$, on a un sous-ensemble $S_v$ (taille $n_v$).
+
+$$
+H_{\text{après}}(A)=\sum_{v} \frac{n_v}{n}\, H(S_v)
+$$
+
+$$
+\text{Gain d’info } IG(S,A)=H(S)-H_{\text{après}}(A)
+$$
+
+## 2.1 Appliquer à `temps`
+
+Sous-groupes (avec $H$ locaux) :
+
+* ensoleilé: $n=5,\ (2\ oui,3\ non)\Rightarrow H=0.9710$
+* nuageux: $n=4,\ (4,0)\Rightarrow H=0$
+* pluvieux: $n=5,\ (3,2)\Rightarrow H=0.9710$
+
+Formule pondérée :
+
+$$
+H_{\text{après}}(\text{temps})=\tfrac{5}{14}\cdot0.9710+\tfrac{4}{14}\cdot0+\tfrac{5}{14}\cdot0.9710
+=\boxed{0.6935}
+$$
+
+$$
+IG=\boxed{0.9403-0.6935=0.2467}
+$$
+
+## 2.2 `humidité`
+
+* haute: $n=7,\ (3,4)\Rightarrow H=0.9852$
+* normale: $n=7,\ (6,1)\Rightarrow H=0.5917$
+
+$$
+H_{\text{après}}(\text{hum})=\tfrac{7}{14}\cdot0.9852+\tfrac{7}{14}\cdot0.5917=\boxed{0.7885}
+$$
+
+$$
+IG=\boxed{0.1518}
+$$
+
+## 2.3 `vent`
+
+* non: $n=8,\ (6,2)\Rightarrow H=0.8113$
+* oui: $n=6,\ (3,3)\Rightarrow H=1.0000$
+
+$$
+H_{\text{après}}(\text{vent})=\tfrac{8}{14}\cdot0.8113+\tfrac{6}{14}\cdot1.0000=\boxed{0.8922}
+$$
+
+$$
+IG=\boxed{0.0481}
+$$
+
+## 2.4 `température`
+
+* chaude: $n=4,(2,2)\Rightarrow H=1.0000$
+* douce: $n=6,(4,2)\Rightarrow H=0.9183$
+* fraîche: $n=4,(3,1)\Rightarrow H=0.8113$
+
+$$
+H_{\text{après}}(\text{temp})= \tfrac{4}{14}\cdot1.0000+\tfrac{6}{14}\cdot0.9183+\tfrac{4}{14}\cdot0.8113=\boxed{0.9111}
+$$
+
+$$
+IG=\boxed{0.0292}
+$$
+
+**À obtenir (résumé racine)**
+$\boxed{IG(\text{temps})=0.2467 > IG(\text{hum})=0.1518 > IG(\text{vent})=0.0481 > IG(\text{temp})=0.0292}$
+→ **Choisir `temps` à la racine.**
+
+
+
+# 3) Développement des branches (même formules)
+
+## 3.1 Branche `temps = nuageux` (4 cas)
+
+$n_{oui}=4,\ n_{non}=0 \Rightarrow \boxed{H=0} \Rightarrow$ **feuille jouer=oui**.
+
+## 3.2 Branche `temps = ensoleilé` (5 cas)
+
+Tester les attributs restants. Meilleur = `humidité`.
+
+* `humidité=haute`: $n=3,(0,3)\Rightarrow H=0$
+* `humidité=normale`: $n=2,(2,0)\Rightarrow H=0$
+
+$$
+H_{\text{après}}= \tfrac{3}{5}\cdot0+\tfrac{2}{5}\cdot0=\boxed{0}
+\Rightarrow IG_{\text{local}}=\boxed{0.9710}
+$$
+
+→ **Feuilles** :
+ensoleilé & **haute** → jouer=**non** ; ensoleilé & **normale** → jouer=**oui**.
+
+## 3.3 Branche `temps = pluvieux` (5 cas)
+
+Meilleur = `vent`.
+
+* `vent=non`: $n=3,(3,0)\Rightarrow H=0$
+* `vent=oui`: $n=2,(0,2)\Rightarrow H=0$
+
+$$
+H_{\text{après}}=\tfrac{3}{5}\cdot0+\tfrac{2}{5}\cdot0=\boxed{0}
+\Rightarrow IG_{\text{local}}=\boxed{0.9710}
+$$
+
+→ **Feuilles** :
+pluvieux & **non** → jouer=**oui** ; pluvieux & **oui** → jouer=**non**.
+
+
+
+# 4) Ce que tu dois avoir à la fin (à vérifier en classe)
+
+* **IG à la racine** : $[0.2467,\ 0.1518,\ 0.0481,\ 0.0292]$ pour $[temps,\ humidité,\ vent,\ température]$.
+* **Règles finales** (5) :
+
+  1. temps=nuageux → **oui**
+  2. ensoleilé & humidité=haute → **non**
+  3. ensoleilé & humidité=normale → **oui**
+  4. pluvieux & vent=non → **oui**
+  5. pluvieux & vent=oui → **non**
+* **Accuracy entraînement** : $14/14$.
+
+
+## Bonus “copier-coller” (Excel / Google Sheets)
+
+* $p$ d’une classe (si la colonne `E` contient oui/non, lignes 2:15) :
+  `=COUNTIF($E$2:$E$15,"oui")/ROWS($E$2:$E$15)`
+* Entropie binaire d’un nœud (cellules P\_oui en A1, P\_non en B1) :
+  `=IF(A1=0,0,-A1*LOG(A1,2)) + IF(B1=0,0,-B1*LOG(B1,2))`
+* Entropie pondérée après split (H1..Hk en plage Hs, poids w1..wk en Ws) :
+  `=SUMPRODUCT(Ws,Hs)`
+* Gain d’info (H\_total en T1, H\_apres en A1) :
+  `=T1 - A1`
+
+
