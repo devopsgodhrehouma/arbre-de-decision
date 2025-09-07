@@ -1,4 +1,41 @@
 
+
+Sur les arêtes : proportion d’exemples qui suivent le chemin.
+Exemple racine → *ensoleillé* : \$5/14\$.
+
+Dans un nœud
+
+  $$
+  P(\text{oui})=\frac{n_{\text{oui}}}{n_{\text{total}}}
+  $$
+
+  Exemple nœud *ensoleillé* : \$2/5=0.40\$.
+
+Dans une feuille (probabilité prédite) : même formule.
+  Exemple *pluvieux & vent = non* : \$3/3=1.00\$.
+
+Entropie
+
+  $$
+  H=-\sum_{c\in\{\text{oui},\text{non}\}} p_c\log_2 p_c
+  $$
+
+Gain d’information
+
+  $$
+  IG=H(\text{parent})-\sum_i \frac{n_i}{n_{\text{total}}}\,H(\text{enfant}_i)
+  $$
+
+Astuce (lissage de Laplace)** pour éviter 0 %/100 % sur de très petites feuilles :
+
+  $$
+  \hat P(\text{oui})=\frac{n_{\text{oui}}+1}{n_{\text{total}}+2}
+  $$
+
+  Exemple : \$n\_{\text{oui}}=0\$, \$n\_{\text{total}}=3\$ → \$\hat P=\tfrac{0+1}{3+2}=0.20\$.
+
+
+
 ## Version ASCII de notre arbre de décision
 
 ```txt
@@ -28,45 +65,12 @@
                                         = 1.00            = 0.00
 ```
 
-## Comment lire / obtenir ces probabilités (compatibles GitHub)
-
-* **Sur les arêtes** : proportion d’exemples qui suivent le chemin.
-  Exemple racine → *ensoleillé* : \$5/14\$.
-
-* **Dans un nœud** :
-
-  $$
-  P(\text{oui})=\frac{n_{\text{oui}}}{n_{\text{total}}}
-  $$
-
-  Exemple nœud *ensoleillé* : \$2/5=0.40\$.
-
-* **Dans une feuille (probabilité prédite)** : même formule.
-  Exemple *pluvieux & vent = non* : \$3/3=1.00\$.
-
-* **Entropie** :
-
-  $$
-  H=-\sum_{c\in\{\text{oui},\text{non}\}} p_c\log_2 p_c
-  $$
-
-* **Gain d’information** :
-
-  $$
-  IG=H(\text{parent})-\sum_i \frac{n_i}{n_{\text{total}}}\,H(\text{enfant}_i)
-  $$
-
-* **Astuce (lissage de Laplace)** pour éviter 0 %/100 % sur de très petites feuilles :
-
-  $$
-  \hat P(\text{oui})=\frac{n_{\text{oui}}+1}{n_{\text{total}}+2}
-  $$
-
-  Exemple : \$n\_{\text{oui}}=0\$, \$n\_{\text{total}}=3\$ → \$\hat P=\tfrac{0+1}{3+2}=0.20\$.
 
 ## Version Graphviz (DOT) — avec lissage de Laplace dans les feuilles
 
 > Colle ce bloc sur **Graphviz Online** (dreampuf.github.io/GraphvizOnline) et exporte en SVG/PNG.
+
+
 
 ```dot
 digraph Arbre {
