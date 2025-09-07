@@ -1,16 +1,16 @@
 ```mermaid
 flowchart LR
-    A["temps ?\nH=0.940 • IG=0.247\nP(oui)=9/14 (0.643)"]
+    A["temps ?\nH = 0,940 • IG = 0,247\nP(oui) = 9/14 (0,643)"]
 
-    A -->|nuageux • 4/14| B["FEUILLE\njouer = oui\nP(oui)=4/4 = 1.00"]
-    A -->|ensoleilé • 5/14| C["humidité ?\nH=0.971 • IG=0.971\nP(oui)=2/5 (0.40)"]
-    A -->|pluvieux • 5/14|  F["vent ?\nH=0.971 • IG=0.971\nP(oui)=3/5 (0.60)"]
+    A -->|nuageux • 4/14| B["FEUILLE\njouer = oui\nP(oui) = 4/4 = 1,00"]
+    A -->|ensoleillé • 5/14| C["humidité ?\nH = 0,971 • IG = 0,971\nP(oui) = 2/5 (0,40)"]
+    A -->|pluvieux • 5/14|  F['vent ?\nH = 0,971 • IG = 0,971\nP(oui) = 3/5 (0,60)']
 
-    C -->|haute • 3/5|   D["FEUILLE\njouer = non\nP(oui)=0/3 = 0.00"]
-    C -->|normale • 2/5| E["FEUILLE\njouer = oui\nP(oui)=2/2 = 1.00"]
+    C -->|haute • 3/5|   D["FEUILLE\njouer = non\nP(oui) = 0/3 = 0,00"]
+    C -->|normale • 2/5| E["FEUILLE\njouer = oui\nP(oui) = 2/2 = 1,00"]
 
-    F -->|non • 3/5|  G["FEUILLE\njouer = oui\nP(oui)=3/3 = 1.00"]
-    F -->|oui • 2/5|  H["FEUILLE\njouer = non\nP(oui)=0/2 = 0.00"]
+    F -->|non • 3/5|  G["FEUILLE\njouer = oui\nP(oui) = 3/3 = 1,00"]
+    F -->|oui • 2/5|  H["FEUILLE\njouer = non\nP(oui) = 0/2 = 0,00"]
 
     %% Styles (optionnels)
     classDef yes fill:#e6ffe6,stroke:#2e7d32,stroke-width:1px;
