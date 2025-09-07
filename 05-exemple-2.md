@@ -1,22 +1,29 @@
 ```mermaid
-flowchart LR
-    A["temps ?\nH = 0,940 • IG = 0,247\nP(oui) = 9/14 (0,643)"]
+digraph Arbre {
+    node [shape=box, style="rounded,filled", color=black, fontname="Helvetica"];
 
-    A -->|nuageux • 4/14| B["FEUILLE\njouer = oui\nP(oui) = 4/4 = 1,00"]
-    A -->|ensoleillé • 5/14| C["humidité ?\nH = 0,971 • IG = 0,971\nP(oui) = 2/5 (0,40)"]
-    A -->|pluvieux • 5/14| F['vent \?\nH = 0,971 • IG = 0,971\nP(oui) = 3/5 (0,60)']
+    A [label="temps ?\nH=0,940 • IG=0,247\nP(oui)=9/14 (0,643)"];
 
-    C -->|haute • 3/5|   D["FEUILLE\njouer = non\nP(oui) = 0/3 = 0,00"]
-    C -->|normale • 2/5| E["FEUILLE\njouer = oui\nP(oui) = 2/2 = 1,00"]
+    B [label="FEUILLE\njouer = oui\nP(oui)=4/4 = 1,00", fillcolor="#e6ffe6"];
+    C [label="humidité ?\nH=0,971 • IG=0,971\nP(oui)=2/5 (0,40)"];
+    F [label="vent ?\nH=0,971 • IG=0,971\nP(oui)=3/5 (0,60)"];
 
-    F -->|non • 3/5|  G["FEUILLE\njouer = oui\nP(oui) = 3/3 = 1,00"]
-    F -->|oui • 2/5|  H["FEUILLE\njouer = non\nP(oui) = 0/2 = 0,00"]
+    D [label="FEUILLE\njouer = non\nP(oui)=0/3 = 0,00", fillcolor="#ffe6e6"];
+    E [label="FEUILLE\njouer = oui\nP(oui)=2/2 = 1,00", fillcolor="#e6ffe6"];
+    G [label="FEUILLE\njouer = oui\nP(oui)=3/3 = 1,00", fillcolor="#e6ffe6"];
+    H [label="FEUILLE\njouer = non\nP(oui)=0/2 = 0,00", fillcolor="#ffe6e6"];
 
-    %% Styles (optionnels)
-    classDef yes fill:#e6ffe6,stroke:#2e7d32,stroke-width:1px;
-    classDef no  fill:#ffe6e6,stroke:#c62828,stroke-width:1px;
-    class B,E,G yes;
-    class D,H no;
+    A -> B [label="nuageux • 4/14"];
+    A -> C [label="ensoleillé • 5/14"];
+    A -> F [label="pluvieux • 5/14"];
+
+    C -> D [label="haute • 3/5"];
+    C -> E [label="normale • 2/5"];
+
+    F -> G [label="non • 3/5"];
+    F -> H [label="oui • 2/5"];
+}
+
 ```
 
 ### Comment lire/obtenir ces probabilités
