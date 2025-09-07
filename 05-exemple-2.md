@@ -28,7 +28,7 @@
 ```
 
 
-### Comment lire/obtenir ces probabilités
+- Comment lire/obtenir ces probabilités
 
 * **Sur les arêtes** : c’est la proportion d’exemples qui suivent ce chemin.
   Exemple racine → *ensoleilé* : $5/14$.
@@ -38,11 +38,13 @@
 * **Entropie H** : mélange des classes du nœud (0 = pur, ≈1 = très mélangé).
 * **Gain d’info IG** : baisse d’entropie après la question posée au nœud.
 
-👉 Astuce classe : pour éviter des 0%/100% sur toutes petites feuilles, utilisez le **lissage de Laplace** :
+- Astuce classe : pour éviter des 0%/100% sur toutes petites feuilles, utilisez le **lissage de Laplace** :
+
 
 $$
 \hat P(\text{oui})=\frac{\#\text{oui}+1}{\#\text{exemples}+2}
 $$
+
 
 Ex. feuille (0 oui / 3 ex.) → $(0+1)/(3+2)=0{,}20$.
 
