@@ -42,17 +42,58 @@
 
 
 
-* **Dans un nœud** :  
+
+## Option 1 (recommandée) — remplacer `#` par des variables
+
+Copie-colle tel quel dans ton README (GitHub va le rendre) :
+
+* **Sur les arêtes** : proportion d’exemples qui suivent le chemin.
+  Exemple racine → *ensoleillé* : \$5/14\$.
+
+* **Dans un nœud** :
+
   $$
-  P(\text{oui}) = \frac{n_{\text{oui}}}{n_{\text{total}}}
+  P(\text{oui})=\frac{n_{\text{oui}}}{n_{\text{total}}}
   $$
 
-* **Dans une feuille (Laplace smoothing)** :  
+* **Dans une feuille (probabilité prédite)** : même calcul.
+  Exemple *pluvieux & vent=non* : \$3/3=1.00\$.
+
+* **Entropie** :
+
   $$
-  \hat{P}(\text{oui}) = \frac{n_{\text{oui}}+1}{n_{\text{total}}+2}
+  H=-\sum_{c\in\{\text{oui},\text{non}\}} p_c\log_2 p_c
   $$
 
+* **Gain d’info** :
 
+  $$
+  IG=H(\text{parent})-\sum_i \frac{n_i}{n_{\text{total}}}\,H(\text{enfant}_i)
+  $$
+
+* **Lissage de Laplace** :
+
+  $$
+  \hat P(\text{oui})=\frac{n_{\text{oui}}+1}{n_{\text{total}}+2}
+  $$
+
+  Exemple : \$n\_{\text{oui}}=0\$, \$n\_{\text{total}}=3\$ → \$\hat P= \tfrac{0+1}{3+2}=0.20\$.
+
+## Option 2 — garder le symbole `#` en l’échappant
+
+Si tu tiens vraiment au symbole `#`, **échappe-le** avec un antislash :
+
+* **Dans un nœud** :
+
+  $$
+  P(\text{oui})=\frac{\#\text{oui}}{\#\text{exemples}}
+  $$
+
+* **Laplace** :
+
+  $$
+  \hat P(\text{oui})=\frac{\#\text{oui}+1}{\#\text{exemples}+2}
+  $$
 
 
 ```dot
