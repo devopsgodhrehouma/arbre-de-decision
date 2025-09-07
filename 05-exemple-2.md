@@ -1,3 +1,4 @@
+
 ## Version ASCII de notre arbre de décision
 
 ```txt
@@ -27,25 +28,7 @@
                                         = 1.00            = 0.00
 ```
 
-
-- Comment lire/obtenir ces probabilités
-
-* **Sur les arêtes** : c’est la proportion d’exemples qui suivent ce chemin.
-  Exemple racine → *ensoleilé* : $5/14$.
-* **Dans un nœud** : $P(\text{oui}) = \#\text{oui du nœud} / \#\text{exemples du nœud}$.
-  Exemple nœud *ensoleilé* : $2/5 = 0{,}40$.
-* **Dans une feuille** (probabilité prédite) : même calcul, ex. feuille *pluvieux & vent=non* : $3/3=1{,}00$.
-* **Entropie H** : mélange des classes du nœud (0 = pur, ≈1 = très mélangé).
-* **Gain d’info IG** : baisse d’entropie après la question posée au nœud.
-
-- Astuce classe : pour éviter des 0%/100% sur toutes petites feuilles, utilisez le **lissage de Laplace** :
-
-
-
-
-## Option 1 (recommandée) — remplacer `#` par des variables
-
-Copie-colle tel quel dans ton README (GitHub va le rendre) :
+## Comment lire / obtenir ces probabilités (compatibles GitHub)
 
 * **Sur les arêtes** : proportion d’exemples qui suivent le chemin.
   Exemple racine → *ensoleillé* : \$5/14\$.
@@ -56,8 +39,10 @@ Copie-colle tel quel dans ton README (GitHub va le rendre) :
   P(\text{oui})=\frac{n_{\text{oui}}}{n_{\text{total}}}
   $$
 
-* **Dans une feuille (probabilité prédite)** : même calcul.
-  Exemple *pluvieux & vent=non* : \$3/3=1.00\$.
+  Exemple nœud *ensoleillé* : \$2/5=0.40\$.
+
+* **Dans une feuille (probabilité prédite)** : même formule.
+  Exemple *pluvieux & vent = non* : \$3/3=1.00\$.
 
 * **Entropie** :
 
@@ -65,36 +50,23 @@ Copie-colle tel quel dans ton README (GitHub va le rendre) :
   H=-\sum_{c\in\{\text{oui},\text{non}\}} p_c\log_2 p_c
   $$
 
-* **Gain d’info** :
+* **Gain d’information** :
 
   $$
   IG=H(\text{parent})-\sum_i \frac{n_i}{n_{\text{total}}}\,H(\text{enfant}_i)
   $$
 
-* **Lissage de Laplace** :
+* **Astuce (lissage de Laplace)** pour éviter 0 %/100 % sur de très petites feuilles :
 
   $$
   \hat P(\text{oui})=\frac{n_{\text{oui}}+1}{n_{\text{total}}+2}
   $$
 
-  Exemple : \$n\_{\text{oui}}=0\$, \$n\_{\text{total}}=3\$ → \$\hat P= \tfrac{0+1}{3+2}=0.20\$.
+  Exemple : \$n\_{\text{oui}}=0\$, \$n\_{\text{total}}=3\$ → \$\hat P=\tfrac{0+1}{3+2}=0.20\$.
 
-## Option 2 — garder le symbole `#` en l’échappant
+## Version Graphviz (DOT) — avec lissage de Laplace dans les feuilles
 
-Si tu tiens vraiment au symbole `#`, **échappe-le** avec un antislash :
-
-* **Dans un nœud** :
-
-  $$
-  P(\text{oui})=\frac{\#\text{oui}}{\#\text{exemples}}
-  $$
-
-* **Laplace** :
-
-  $$
-  \hat P(\text{oui})=\frac{\#\text{oui}+1}{\#\text{exemples}+2}
-  $$
-
+> Colle ce bloc sur **Graphviz Online** (dreampuf.github.io/GraphvizOnline) et exporte en SVG/PNG.
 
 ```dot
 digraph Arbre {
@@ -122,6 +94,7 @@ digraph Arbre {
     F -> H [label="oui • 2/5"];
 }
 ```
+
 
 👉 Vous pouvez le coller dans [Graphviz Online](https://dreampuf.github.io/GraphvizOnline) et exporter en **SVG/PNG**.
 
