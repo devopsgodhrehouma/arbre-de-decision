@@ -41,25 +41,19 @@
 - Astuce classe : pour éviter des 0%/100% sur toutes petites feuilles, utilisez le **lissage de Laplace** :
 
 
-$$
-\hat P(\text{oui})=\frac{\#\text{oui}+1}{\#\text{exemples}+2}
-$$
+
+* **Dans un nœud** :  
+  $$
+  P(\text{oui}) = \frac{n_{\text{oui}}}{n_{\text{total}}}
+  $$
+
+* **Dans une feuille (Laplace smoothing)** :  
+  $$
+  \hat{P}(\text{oui}) = \frac{n_{\text{oui}}+1}{n_{\text{total}}+2}
+  $$
 
 
-Ex. feuille (0 oui / 3 ex.) → $(0+1)/(3+2)=0{,}20$.
 
-
-
-
-
-
-
-
-Exemple
-
-$$
-\hat P(\text{oui}) = \frac{\#oui + 1}{\#exemples + 2}
-$$
 
 ```dot
 digraph Arbre {
