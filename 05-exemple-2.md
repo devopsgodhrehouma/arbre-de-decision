@@ -53,10 +53,7 @@ Ex. feuille (0 oui / 3 ex.) → $(0+1)/(3+2)=0{,}20$.
 
 
 
-
-
-### Exemple avec **Laplace smoothing intégré**
-
+Exemple
 
 $$
 \hat P(\text{oui}) = \frac{\#oui + 1}{\#exemples + 2}
